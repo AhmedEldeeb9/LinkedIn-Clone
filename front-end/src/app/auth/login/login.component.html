@@ -1,0 +1,50 @@
+<div class="selector">
+<div class="container">
+  <div class="row  login-card justify-content-center ">
+    <div class="mylogo col-6">
+      <img id="mylogo" src="../../../assets/images/logo.png" alt="">
+    </div>
+  </div>
+  <div class="row justify-content-center login-card">
+   
+    <div class="card" style="width: 28rem;">
+      <div class="header-content">
+        <h1 class="heading"> Sign in</h1>
+        <p class="sub-heading">Stay tuned to your professional world</p>
+      </div>
+      <div class="card-body">
+          <form class="example-form" name="form" #loginform="ngForm" (ngSubmit)="f.form.valid && login(loginform)" #f="ngForm" novalidate>
+            <mat-form-field class="form-input" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input type="email" name="username" [(ngModel)]="model.username" #username="ngModel" required  matInput placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="f.submitted && !username.valid" style="color: red;">Email is <strong>required</strong></mat-error>
+            </mat-form-field><br>
+            <mat-form-field class="form-input" appearance="fill">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required  placeholder="Password">
+               <mat-error  *ngIf="f.submitted && !password.valid" style="color: red;">Password is <strong>required</strong></mat-error>
+            </mat-form-field> <br>
+
+            <a href="" class="forgot-password" data-cie-control-urn="forgot-password-btn">Forgot password?</a><br>
+            <div *ngIf="loginerror && dangerBox" class="alert alert-danger" role="alert">
+              <small class="text-danger" >{{loginerror.error.message}}{{loginmsg}}</small>
+                <button style="color: #ff0b00; background-color: transparent" type="button" class="close" aria-label="Close" (click)="dangerBox = false">
+                  <span>&times;</span>
+                </button>
+              </div>
+            <div>
+              <button [disabled]="loading" class="sign-in-btn btn btn-primary" type="submit" >Sign in</button>
+              <div  *ngIf="loading" class="spinner-border spinner-border-sm" role="status"></div>
+            </div>
+          </form>
+        <div class="join-now">New to LinkedNet? <a href="\signup" class="join-now-btn"><b>Join now</b></a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+ 
+
+
+<app-footer></app-footer>

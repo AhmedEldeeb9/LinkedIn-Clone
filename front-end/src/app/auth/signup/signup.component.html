@@ -1,0 +1,73 @@
+<div class="selector">
+    <div class="container">
+      <div class="row  login-card justify-content-center ">
+        <div class="mylogo col-6">
+          <img id="mylogo" src="../../../assets/images/logo.png" alt="">
+        </div>
+      </div>
+      <div class="row justify-content-center login-card">
+       
+        <div class="card" style="width: 28rem;">
+          <div class="header-content">
+            <h1 class="heading">Sign up</h1>
+            <p class="sub-heading">Create your professional world</p>
+          </div>
+          <div class="card-body">
+            <form class="example-form" name="form" #signupForm="ngForm" (ngSubmit)="signup(signupForm)">            
+                <mat-form-field class="form-input"  appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput type="text" name="name" id="name" placeholder="Ex. Nick" [(ngModel)]="user.name" #name="ngModel" required [class.is-invalid]="name.invalid && submitattempt">
+                </mat-form-field><br>
+
+                <mat-form-field class="form-input" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput type="text" name="surname" id="surname"  placeholder="Ex. Brown" [(ngModel)]="user.surname" #surname="ngModel" required [class.is-invalid]="surname.invalid && submitattempt">
+                </mat-form-field><br>
+
+                <mat-form-field class="form-input" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="username" name="username" id="username" placeholder="Ex. pat@example.com" [(ngModel)]="user.username" #username="ngModel" required [class.is-invalid]="username.invalid && submitattempt">
+                  </mat-form-field><br>
+
+                <mat-form-field class="form-input" appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" name="password id="password placeholder="Password" [(ngModel)]="user.password" #password="ngModel" required [class.is-invalid]="password.invalid && submitattempt">
+                </mat-form-field> <br>
+
+                <mat-form-field class="form-input" appearance="fill">
+                    <mat-label>Repeat Password</mat-label>
+                    <input matInput type="password" name="passwordConfirm" id="passwordConfirm" placeholder="Repeat Password" [(ngModel)]="user.passwordConfirm" #passwordConfirm="ngModel" required>
+                </mat-form-field><br>
+
+                <mat-form-field class="form-input" appearance="fill">
+                    <mat-label>Phone Number</mat-label>
+                    <input matInput type="text" name="phoneNumber" id="phoneNumber" placeholder="Phonenumber" [(ngModel)]="user.phoneNumber" #phone="ngModel" required
+                      [class.is-invalid]="submitattempt && (user.passwordConfirm || user.password) && user.password !== user.passwordConfirm">
+                </mat-form-field> <br>
+                <div>
+                  <label for="profilephoto" style="display: block">
+                    <span>Profile photo </span> <span class="text-danger" >*</span>
+                  </label>
+                  <input #profilephoto id="profilephoto" type="file" accept=".jpg,.jpeg,.png" style="display: block" (change)="setProfilePhoto(profilephoto)" required >
+                  <small *ngIf="profilePhoto && (profilePhoto.type !='image/jpeg' && profilePhoto.type !='image/png') && submitattempt " >Image file must be jpeg or png</small>
+                  <small *ngIf="!profilePhoto && submitattempt" style="color: red;">Please choose profile photo</small>
+                </div>
+                <div *ngIf="signuperror && dangerBox && profilePhoto" class="alert alert-danger" role="alert" style="margin-top: 10px; margin-bottom: 5px;">
+                  <small class="text-danger" >{{signuperror.error.message}}</small>
+                  <button style="color: #ff0b00; background-color: transparent" type="button" class="close" aria-label="Close" (click)="dangerBox = false">
+                    <span>&times;</span> 
+                  </button>
+                </div>
+                <div *ngIf="submitattempt && (user.passwordConfirm || user.password) && user.password !== user.passwordConfirm" class="alert alert-danger" role="alert" style="margin-top: 10px; margin-bottom: 5px;">
+                  <small class="text-danger" >Passwords do not match</small>
+                </div>
+                <button class="sign-in-btn btn btn-primary" [disabled]="!signupForm.valid" type="submit" >Sign up</button>
+            </form>
+            <div class="join-now">Already have an account? <a href="\login" class="join-now-btn"><b>Sign in</b></a></div>
+          </div>
+        </div>
+      </div>
+    </div>    
+</div>
+<app-footer></app-footer>
+    
