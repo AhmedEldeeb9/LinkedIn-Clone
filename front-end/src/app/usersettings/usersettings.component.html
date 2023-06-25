@@ -1,0 +1,105 @@
+<app-navbar></app-navbar>
+<div class="settings-content">
+
+    <div class="container">
+        <div class="main-body"> 
+            <div class="row gutters-sm" justify-content-center>
+                <div class="col-md-6 mb-3">
+                    <div class="card settings-card" id="leftCard">
+                      <div class="card-body">
+                            <h5 class="card-title" style= "font-size: 20px; text-align: center;"><b>Change Email</b></h5>
+                            <form name="emailform" #emailform="ngForm" (ngSubmit)="emailSubmit(emailform)">
+                                <hr>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="New Email" [(ngModel)]="usersettings.newUsername" name="emailinput" #email="ngModel" pattern="(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|&quot(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*&quot)@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])"
+                                           [class.is-invalid]="email.invalid && submitattempt_1" required>
+                                    <div *ngIf="email.invalid && submitattempt_1">
+                                      <small *ngIf="email.errors.pattern" class="text-danger">Invalid email address</small>
+                                    </div>
+                                    <div *ngIf="!usersettings.newUsername && submitattempt_1">
+                                        <small class="text-danger">New email is required field</small>
+                                    </div>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="pwd_1" class="pswd-item"><span>Current Password </span></label>
+                                    <input type="password" class="form-control" id="pwd_1" placeholder="Enter current password" [(ngModel)]="currPwd_1" name="currPwd_1" #pwd_1="ngModel"
+                                           [class.is-invalid]="submitattempt_1 && (currPwd_1 !== usersettings.currentPassword)" required>
+                                    
+                                    <small *ngIf="pwd_1.invalid && submitattempt_1" class="text-danger">Current password is required field</small>
+                                
+                                    <div *ngIf="submiterror && dangerBox_1" class="alert alert-danger" role="alert">
+                                        <small class="text-danger" >{{submiterror.error.message}}</small>
+                                        <button style="color: #ff0b00; background-color: transparent" type="button" class="close" aria-label="Close" (click)="dangerBox_1 = false">
+                                          <span>&times;</span>
+                                        </button>
+                                    </div>
+                                
+                                </div>
+                              
+                                <div >
+                                    <button [disabled]="loading_1" type="submit" class="btn btn-settings">Submit</button>
+                                    <div  *ngIf="loading_1" class="spinner-border spinner-border-sm" role="status"></div>
+                                </div>
+                                <div *ngIf="submitmsg && successBox_1" class="alert alert-success" role="alert">
+                                    <small class="text-success" >{{submitmsg}}</small>
+                                    <button style="color: green; background-color: transparent" type="button" class="close" aria-label="Close" (click)="successBox_1 = false">
+                                      <span>&times;</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <div class="card settings-card" id="rightCard">
+                        <div class="card-body">
+                            <h5 class="card-title" style= "font-size: 20px; text-align: center;"><b>Change Password</b></h5>
+                            <form name="pwdform" #pwdform="ngForm" (ngSubmit)="pwdSubmit(pwdform)">
+                                <hr>
+                                <div class="form-group" >
+                                    <label for="pwd_2" class="pswd-item"><span>Current Password </span></label>
+                                    <input type="password" class="form-control" id="pwd_2" placeholder="Enter current password" [(ngModel)]="currPwd_2" name="currPwd_2" #pwd_2="ngModel"
+                                           [class.is-invalid]="submitattempt_2" required>
+                                    <small *ngIf="pwd_2.invalid && submitattempt_2" class="text-danger">Current password is required field</small>
+                                    
+                                    <div *ngIf="submiterror && dangerBox_2" class="alert alert-danger" role="alert">
+                                        <small class="text-danger" >{{submiterror.error.message}}</small>
+                                        <button style="color: #ff0b00; background-color: transparent" type="button" class="close" aria-label="Close" (click)="dangerBox_2 = false">
+                                          <span>&times;</span>
+                                        </button>
+                                    </div>
+                                      
+                                </div>
+                                <div class="form-group" >
+                                    <label for="newpwd" class="pswd-item"><span>New Password </span></label>
+                                    <input type="password" class="form-control" id="newpwd" placeholder="Enter new password" [(ngModel)]="usersettings.newPassword" name="newpasswordinput" #newpwd="ngModel"
+                                            [class.is-invalid]="newpwd.invalid && submitattempt_2" required>
+                                    <small *ngIf="newpwd.invalid && submitattempt_2" class="text-danger">New password is required field</small>
+                                </div>
+                                <div class="form-group" >
+                                    <label for="pwdconf" class="pswd-item">Confirm New Password</label>
+                                    <input type="password" class="form-control" id="pwdconf" placeholder="Enter password confirm" [(ngModel)]="usersettings.passwordConfirm" name="passwordconfirminput"  #pwdconf="ngModel"
+                                            [class.is-invalid]="submitattempt_2 && (usersettings.passwordConfirm || usersettings.newPassword) && usersettings.newPassword !== usersettings.passwordConfirm" required>
+                                    <small *ngIf="submitattempt_2 && (usersettings.passwordConfirm || usersettings.newPassword) && usersettings.newPassword !== usersettings.passwordConfirm" class="text-danger">Passwords do not match</small>
+                                
+                                </div>
+                                <div>
+                                    <button  [disabled]="loading_2" type="submit" class="btn btn-settings">Submit</button>
+                                    <div  *ngIf="loading_2" class="spinner-border spinner-border-sm" role="status"></div>
+                                </div>
+                                <div *ngIf="submitmsg && successBox_2" class="alert alert-success" role="alert">
+                                    <small class="text-success" >{{submitmsg}}</small>
+                                    <button style="color: green; background-color: transparent" type="button" class="close" aria-label="Close" (click)="successBox_2 = false">
+                                      <span>&times;</span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div> 
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

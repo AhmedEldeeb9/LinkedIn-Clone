@@ -1,0 +1,22 @@
+.settings-card{
+    margin-top: 20%;
+}
+
+#leftCard{
+    margin-left: 20%;
+    margin-right: 5%;
+}
+
+#rightCard{
+    margin-right: 20%;
+    margin-left: 5%;
+}
+.btn-settings{
+    background-color: #158eff;
+    color: white;
+    margin-top: 20px;
+}
+
+.pswd-item{
+    margin-top: 10px;
+}
