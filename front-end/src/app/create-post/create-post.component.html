@@ -1,0 +1,44 @@
+<div class="card text-white  text-center">
+  <div class="card-body " style=" font-family: 'Helvetica';">
+      <div class="container">
+        <form name="form" #postform="ngForm" (ngSubmit)="createNewPost(postform)">
+          <div class="row">
+              <div class="input-group text-box">
+                  <textarea class="form-control text-post" [(ngModel)]="newPost.content" name="content" placeholder="Start a post" maxlength="280"></textarea>
+              </div>
+          </div>
+          <div class="row justify-content-md-center" id="media">
+              <div class="col">
+                <!-- <label class="btn btn-light">
+                    <i class="fas fa-image" style="color:rgb(133, 227, 255);"></i> Photo
+                    
+                </label> -->
+                <label for="upload-photo">  <i class="fas fa-image" style="color:rgb(133, 227, 255);"></i> Photo</label>
+                <input #p class="btn btn-light" name="photo" id="upload-photo" type="file" accept=".jpg,.jpeg,.png" multiple (change)="setPhotos(p)">
+                <small *ngIf=" !validphotos && submitattempt " class="text-danger">Image files must be jpeg or png</small>
+                
+              </div>
+              <div class="col">
+                    <label for="upload-video">  <i class="fab fa-youtube" style="color:rgb(149, 235, 141);"></i> Video</label>
+                    <input class="btn btn-light" name="video" id="upload-video" type="file" accept=".jpg,.jpeg,.png">
+              </div>
+              <div class="col">
+                    <label for="upload-sound">  <i class="fas fa-music" style="color:pink;"></i> Sound</label>
+                    <input class="btn btn-light" name="sound" id="upload-sound" type="file" accept=".jpg,.jpeg,.png">
+              </div>                            
+              <div class="col">
+                  <button  [disabled]="!newPost.content" type="submit"  class="btn post-btn" >Post</button>
+              </div>
+          </div>
+
+        </form>
+        
+      </div>  
+      <div *ngIf="photos.length" class="card-footer" style="margin-top: 10px; background-color: white;">
+        <div *ngFor="let p of photos;" style="color: black; float: left;">
+          <i style="padding-right:5px;" class="far fa-check-circle"></i> <b>{{p.name}}:</b> has been uploaded with success!
+          <br>
+        </div>
+    </div>
+  </div>
+</div>
